@@ -1,0 +1,20 @@
+html {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: "Tahoma", Helvetica, sansserif;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+body {
+  background-color: rgb(255, 255, 255);
+  color: var(--aBg-color);
+}
+
+p {
+  max-width: 80%;
+}
+
+.audio-player {
+}

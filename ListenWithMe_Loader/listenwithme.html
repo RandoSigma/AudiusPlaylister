@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html itemscope="" itemtype="https://schema.org/WebPage" lang="en">
+<head>
+	<title>Listen With Me</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Security-Policy" content="script-src 'unsafe-inline'"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5.0, minimum-scale=1"/>
+	<meta http-equiv="cache-control" content="max-age=900"/>
+	<meta name="msapplication-TileColor" content="#da532c"/>
+	<meta name="theme-color" content="#ffffff"/>
+	<meta name="msapplication-TileColor" content="#da532c"/>
+	<meta name="description" content="Put your description here."/>
+	<meta name="theme-color" content="#ffffff"/>
+	<meta property="og:title" content=""/>
+	<meta property="og:site_name" content="Underglimmer and RandoSigma Gaming Concern"/>
+	<meta property="og:description" content="RandoSigma (Twitch Streamer) searches for the Underglimmer in Massive Multiplayer Online and Hosted Games built into Open Worlds."/>
+	<meta property="og:type" content="og:website"/>
+	<meta property="og:url" content="https://www.underglimmer.com/"/>
+	<meta property="og:locale" content="en_US"/>
+	<meta property="og:image" content="https://www.underglimmer.com/p/big_u.png"/>
+	<meta content="Listen to music while I do! Audius Playlist synchronizer!" name="description"/>
+	<meta content="noodp" name="robots"/>
+	<meta content="https://www.underglimmer.com/p/big_u.png" itemprop="image"/>
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+	<link rel="manifest" href="/site.webmanifest"/>
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"/>
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+	<link rel="manifest" href="/site.webmanifest"/>
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"/>
+	<link rel="stylesheet" href="./site.css"/>
+	<link rel="stylesheet" href="./s/audiusPlaylister.css"/>
+	<noscript>
+		<link rel="stylesheet" href="/assets/css/noscript.css"/>
+	</noscript>
+</head>
+<body>
+<div class="main-content">
+	<h1>Listen With Me</h1>
+	<p>Welcome to my Audius Playlister! Here is some music you can stream without ANY interruption or nosy corporate tracking methods thanks to Web3 Blockchain Technologies! Source code is Creative Commons and free for you to use.  If you want to copy the whole section you can swap out your OWN playlists on Audius too! Check it out!</p>
+	<p>https://audius.co</p>
+</div>
+<!-- -------------------------------------------- SNIP FROM HERE ------------------------------------------------------>
+<div class="audio-player">
+	<div id="aPlayerContainer">
+		<input id="aVolMute" type="hidden" min="0" max="1" />
+		<div id="aWrap">
+			<div id="aNowPlaying">
+					<div id="aArtwork">
+						<a id="aLink" href="https://audius.co/strad" title="Loading playlist..." target="_AUDIUS">
+						<img alt="Track Artwork" width="300px" height="300px" id="aArtworkImg" src="./s/plugArtwork.png" title="Track Artwork" />
+						</a>
+					</div>
+					<div id="aNowPlayingText">
+						Loading playlist...
+					</div>
+			</div>
+			<div id="aSeekBar">
+				<button id="aPlay" alt="Pause/Play Button"><img id="aPlayIcoImg" alt="Pause/Play Button" title="Pause/Play Button" src="./s/btnPlay.svg" width="150px" height="150px"/></button>
+				<input id="aSeek" alt="Track Seek Slider" type="range" min="0" value="0" step="1"/>
+				<label for="aSeek">SEEK</label>
+				<div id="aTimeContainer">
+					<div id="aNow"></div>
+					<div id="aSep">/</div>
+					<div id="aTime"></div>
+				</div>
+			</div>
+			<div id="aVolBar">
+				<button id="aVol" alt="Mute/Unmute Button"><img id="aVolIcoImg" alt="Mute Button" title="Mute Button" src="./s/btnVol.svg" width="150px" height="150px"/></button>
+				<input id="aVolume" alt="Volume Slider" type="range" min="0" max="1" step="0.01"/>
+				<label for="aVolume">VOLU</label>
+				<div id="cVisualiser"></div>
+			</div>
+			<div id="aListWrap">
+				<div id="aList">
+					<div id="aLoaderOverlay">
+						<div id="aLoaderSpinner"></div>
+					</div>
+				</div>
+			</div>
+			<div id="aMarquee">
+				Created for you by Stradius
+				<div id="aStatusServers">.</div>
+				<div id="aStatusMetadata">.</div>
+				<div id="aStatusTracks">.</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+/*
+PURPOSE:
+
+HOW THIS WORKS:
+
+1) Seek out available Audius Servers by initiating a session with the Audius API. The session is initiated using the
+	actual Audius URL for the playlist you want to play.  See the variables set below for examples.
+	The Audius API will respond with the ID string for that playlist if it is found or error out.
+2) Once you have that origin ID for the playlist you can then use that to pull a Track List from the Audius API.
+3) Each track in the Playlist comes with artist and track ID info in the Response JSON.  You must gather whatever you
+ 	intend to use from the set but be aware that Track Internal ID and the Artist Internal ID are both mixed in there.
+ 	There's some good info if you want to expand this player UI with more pizzazz.
+4) With this information in hand, you can rig up the player interface to pull associated images/title info and links.
+	The origin URL for the tracks may come from other Audius Endpoints providing service from the
+	IPFS (Inter-Planetary File System).
+
+Starting Points: ** look for "id" in the JSON response.
+
+Sample API PlayList ID Search:
+https://blockchange-audius-discovery-02.bdnodes.net/v1/resolve?url=https://audius.co/strad/playlist/one-world-dream-119912&app_name=LISTENWITHME
+
+Sample API PlayList Track list:
+https://blockchange-audius-discovery-02.bdnodes.net/v1/playlists/ZZx3E/tracks?app_name=LISTENWITHME
+(NOTE: There are Artist ID's also in the results of the previous API call).
+
+Sample API Pull Track Item for Playing:
+https://blockchange-audius-discovery-02.bdnodes.net/v1/tracks/AKQom/stream?app_name=LISTENWITHME
+
+DEPENDENCIES ON THE API CALLS SUCCEEDING:
+This is linear with Try/Catch blocks nested at each failure point. NO outside script is required for this player to
+function in your web pages.  If any point in the calls out to the source Audius API endpoints fail the page will just
+throw an error. A simple solution at that point might be to reload the page if all the starting point Playlist URL is
+correct... the Internet can be fickle.
+
+WISHLIST FOR IMPROVEMENTS:
+TODO: Suggest TO Audius Developers that they provide some sort of Gain Data about audio tracks in their
+		API Track Metadata to help with normalizing audio levels of volume during playback.
+TODO: Use Browser Built-in WebAudio technology to analyze tracks and normalize gain between them.
+TODO: Add a Sound Visualizer in the cVisualiser Block that animates along with the gain.
+TODO: Finalize base color palette.
+TODO: Develop base DarkMode color palette.
+TODO: Add i18n UI Strings
+TODO: Add ListenWithMe Sync display section on UI
+TODO: Add API Chat test layer to Twitch
+TODO: Add API Chat test layer to Discord
+TODO: Add API Chat test layer to Roll20
+TODO: Consider version for SoundCloud playlist API (may not work if advertisements are inserted)
+TODO: Consider version for YouTube Music (using timestamp specs in URL)
+TODO: I've noticed some Audius Nodes downgrade the https protocol to http protocol for some of the assets which can
+	be caught as a FAILURE by browsers which are trying to validate secure protocol is ALWAYS being used (i.e. Firefox)
+	so it would be nice to de-escalate the failure gracefully by falling back to other Audius Nodes for service.
+TODO: Add Playlist name and Image feature to future versions.
+TODO: Pray that Apple will finally get iOS Safari to work like the rest of them.
+*/
+
+    console.log("ListenWithMe starting up...");
+
+    // Set your Audius Playlist by the URL to reach the Playlist (examples below) ~~
+    //const jsOriginPlaylist = "https://audius.co/strad/playlist/stradius-menagerie-1972895293"; // <-- STARTS HERE!
+    const jsOriginPlaylist = "https://audius.co/strad/playlist/one-world-synthetic-97265";
+    //const jsOriginPlaylist = "https://audius.co/strad/playlist/one-world-dream-119912";
+
+    // Use Start Volume setting to find a middle ground for your playlist. (Range 0.1 to 1.0)
+    const jsStartVolume = .1;
+	let jsUserStart = 0; // Set to OFF until the PLAY button is pressed first. <--- NOTE this is a GLOBAL.
+	let jsAudioSupportPath = "./s/"; // <-- Use THIS to remap most of the support files to your directories.
+
+    const jsSeekPlaylistIdUrl = "/v1/resolve?url=" + jsOriginPlaylist + "&app_name=LISTENWITHME";
+    const jsPlayList = [{}];
+
+    // jsDebug is used to flag additional console output if you're debugging the code.
+    // if it's set to 1 (true) then it will display much more on the browser console
+    const jsDebug = 0; // <-- Change to ZERO for production. ~~
+
+    // jsEditMode is intended to hide the loading spinner to help you tinker the HTML layout without waiting.
+    const jsEditMode = 0; // <-- Change to ZERO for production.
+    if ( jsEditMode ) {
+        document.getElementById('loader-overlay').style.display = 'none';
+    }
+    
+	// Full list will be jsAudiusServerList[0-9]
+	fetch("https://api.audius.co")
+		.then((response) => response.json())
+		.then((data) => {
+			const jsAudiusServerList = data;
+			let jsAudiusActiveServer = "";
+
+			// TODO: Add Test Cycle for Servers. Loop through available list until one works.
+			// const jsAudiusActiveServers = [];
+
+			if (jsAudiusServerList.data[0].length > 0) {
+				let jsSrvId = 0;
+				jsAudiusActiveServer = "";
+				for (const server of jsAudiusServerList.data) {
+                    /* Example of how to filter OUT a specific server */
+					const jsFound = server.indexOf("cultur3");
+					if (jsFound < 1) {
+						jsAudiusActiveServer = jsAudiusServerList.data[jsSrvId];
+					}
+                    jsSrvId = jsSrvId + 1;
+				}
+				if (jsAudiusActiveServer === "") {
+					throw(error);
+				}
+			}
+
+			if (jsDebug) {
+				console.log("Contacting: " + jsAudiusActiveServer);
+			}
+
+			// Next Try Pulling Target PlayList Info
+			fetch(jsAudiusActiveServer + jsSeekPlaylistIdUrl)
+				.then((response) => response.json())
+				.then((data) => {
+					const jsAudiusSelectedServer = 0;
+					const jsAudiusOriginPlaylistRawData = data.data[jsAudiusSelectedServer];
+
+					if (jsDebug) {
+						console.log(data);
+					}
+
+					// Next Pull A List of Tracks and Supporting Info For The List
+					const jsAudiusOriginTrackslistUrl = "/v1/playlists/" + jsAudiusOriginPlaylistRawData["id"] + "/tracks?app_name=LISTENWITHME";
+					fetch(jsAudiusActiveServer + jsAudiusOriginTrackslistUrl)
+						.then((response) => response.json())
+						.then((data) => {
+							const jsAudiusOriginTrackslistRawData = data;
+							let trackCount = Object.keys(jsAudiusOriginTrackslistRawData.data).length;
+							console.log(trackCount + " tracks found.");
+							if (trackCount > 0) {
+								// Not an empty track list.
+								const jsAudiusTrackList = jsAudiusOriginTrackslistRawData.data;
+
+								// Creating a playList
+								let playList = [];
+
+								// Final Refined PlayList
+								let finalPlayList = [];
+
+								// Stradius: I front-load the playlist with some local fixed data.
+								// Remove this block if you want to modify the results.
+								playList.push({
+									name: 'Listen With Me',
+									src: jsAudiusActiveServer + '/v1/tracks/JprNo/stream?app_name=LISTENWITHME',
+									artist: 'Stradius',
+									artwork: jsAudioSupportPath + 'plugArtwork.png',
+									artwork_small: jsAudioSupportPath + 'plugArtwork.png',
+									link: 'https://audius.co/strad'
+								});
+
+								for (const track of jsAudiusTrackList) {
+									if (jsDebug) {
+										console.log(track);
+									}
+
+									// Check for Missing Artwork, Use Plug Image Fallback
+									let jsArtwork = jsAudioSupportPath + "plugArtwork.png";
+									let jsArtworkSmall = jsAudioSupportPath + "plugArtwork.png";
+									let jsArtObject = ""; // catch and test
+									let jsArtObjectSm = ""; // small version
+									if (track["artwork"] === null) {
+										jsArtObject = jsArtwork;
+										jsArtObjectSm = jsArtwork;
+									} else {
+										if (track['artwork']['480x480'] === null) {
+											jsArtObject = jsArtwork;
+										} else {
+											jsArtObject = track['artwork']['480x480'];
+										}
+										/* TODO: Put this smaller image to use on the smaller screen.  */
+										if (track['artwork']['150x150'] === null) {
+											jsArtObjectSm = jsArtwork;
+										} else {
+											jsArtObjectSm = track['artwork']['150x150'];
+										}
+									}
+
+									jsArtwork = jsArtObject;
+									jsArtworkSmall = jsArtObjectSm;
+									playList.push({
+										name: track['title'],
+										src: jsAudiusActiveServer + '/v1/tracks/' + track['id'] + '/stream?app_name=LISTENWITHME',
+										artist: track['user']['name'],
+										artwork: jsArtwork,
+										artwork_small: jsArtworkSmall,
+										link: "https://audius.co" + track['permalink']
+									});
+								}
+								finalPlayList = playList;
+
+								if (jsDebug) {
+									console.log(finalPlayList);
+								}
+								console.log("ListenWithMe: Audius tracks meta-data loading complete.");
+
+								// Now I have a nice playList array. Time to display it!
+								// Hide The Load Spinner Display
+								document.getElementById('aLoaderSpinner').innerHTML = "NOW PRESS PLAY!";
+								document.getElementById('aLoaderSpinner').style.animation = 'animateReady .5s linear forwards';
+
+								// The WHOLE PLayer starts HERE
+								// Isolated from primary page BUT also dependent upon Fetches and Try/Catches
+
+								// Establish audioPlayer Controls
+								const audio = new Audio(),
+									aPlay = document.getElementById("aPlay"),
+									aPlayIcoImg = document.getElementById("aPlayIcoImg"),
+									aNow = document.getElementById("aNow"),
+									aTime = document.getElementById("aTime"),
+									aSeek = document.getElementById("aSeek"),
+									aVolume = document.getElementById("aVolume"),
+									aVolIcoImg = document.getElementById("aVolIcoImg"),
+									aList = document.getElementById("aList"),
+									aNowPlayingText = document.getElementById("aNowPlayingText"),
+									aLink = document.getElementById("aLink"),
+									aArtworkImg = document.getElementById("aArtworkImg"),
+									cVisualiser = document.getElementById("cVisualiser");
+
+								// Immediately mute to appease iOS Safari
+								audio.muted = true;
+								audio.volume = 0;
+
+								// Populate the List of Tracks in the UI.
+								for (let i in playList) {
+									let row = document.createElement("div");
+									row.className = "aRow";
+									row.innerHTML = playList[i]["name"];
+									row.addEventListener("click", () => {
+										audPlay(i);
+									});
+									playList[i]["row"] = row;
+									aList.appendChild(row);
+								}
+
+								// Set Default Volume Here -- START Muted to satisfy Audio Policy of Safari/iOS
+								audio.muted = true;
+								audio.volume = jsStartVolume; // Audio Object Itself
+								aVolume.value = jsStartVolume; // Audio Bar UI Display
+								cVisualiser.innerHTML = (audio.volume * 100).toFixed(0) + "%";
+
+								// Build the Control Mechanisms for Users
+								// Function To Play Selected Track and Update UI
+								audNow = 0, // current song (start with zero)
+									audStart = true, // auto start next song
+									// TODO: Handle 404 if Track Is Not Found
+									// Advance Now Playing To Current Track
+									audPlay = (idx, nostart) => {
+										audNow = idx;
+										audStart = nostart ? false : true;
+										audio.src = finalPlayList[idx]["src"];
+										// Update User Interface To Reflect Current Info
+										for (const jsTrackId in finalPlayList) {
+											if (jsTrackId == idx) {
+												finalPlayList[jsTrackId]["row"].classList.add("now");
+												aNowPlayingText.innerHTML = finalPlayList[jsTrackId]["name"] + '<br/> by ' + finalPlayList[jsTrackId]["artist"];
+												aArtworkImg.src = finalPlayList[jsTrackId]["artwork"];
+												aArtworkImg.alt = finalPlayList[jsTrackId]["name"] + " by " + finalPlayList[jsTrackId]["artist"];
+												aArtworkImg.title = finalPlayList[jsTrackId]["name"] + " by " + finalPlayList[jsTrackId]["artist"];
+												aLink.href = finalPlayList[jsTrackId]["link"];
+												aLink.alt = finalPlayList[jsTrackId]["name"] + " by " + finalPlayList[jsTrackId]["artist"];
+												aLink.title = finalPlayList[jsTrackId]["name"] + " by " + finalPlayList[jsTrackId]["artist"];
+											} else {
+												finalPlayList[jsTrackId]["row"].classList.remove("now");
+											}
+										}
+									};
+
+								// Start Playback after Track is Buffered
+								audio.addEventListener("canplay", () => {
+									if (jsUserStart) {
+										/* NONE of this can work unless the USER has pushed PLAY */
+										if (audStart) {
+											audio.muted = true;
+											audio.play();
+											audio.muted = false;
+										}
+									}
+								});
+
+								// Autoplay the next song in the playlist.
+								audio.addEventListener("ended", () => {
+									audNow++;
+									if (audNow >= finalPlayList.length) {
+										audNow = 0;
+									}
+									audPlay(audNow);
+								});
+
+								// Set the first song. ... browser security requires a human interaction to start.
+								audPlay(0);
+
+								// Play/Pause Button Display -- Set Play/Pause Sync with Audio Object
+								audio.addEventListener("play", () => {
+									aPlayIcoImg.src = jsAudioSupportPath + "btnPause.svg";
+								});
+								audio.addEventListener("pause", () => {
+									aPlayIcoImg.src = jsAudioSupportPath + "btnPlay.svg";
+								});
+
+								// Button to Play/Pause
+								aPlay.addEventListener("click", () => {
+									jsUserStart = 1; // Now it can auto-play because a button was pressed.
+									document.getElementById('aLoaderOverlay').style.display = 'none';
+									if (audio.paused) {
+										audio.muted = true;
+										audio.play();
+										audio.muted = false;
+									} else {
+										audio.pause();
+									}
+								});
+
+								// Track Playback Progress -- Format Time Status HH:MM:SS
+								const timeString = (secs) => {
+									// HOURS, MINUTES, SECONDS
+									let ss = Math.floor(secs),
+										hh = Math.floor(ss / 3600),
+										mm = Math.floor((ss - (hh * 3600)) / 60);
+									ss = ss - (hh * 3600) - (mm * 60);
+
+									// Formatted Time
+									if (hh > 0) {
+										mm = mm < 10 ? "0" + mm : mm;
+									}
+									ss = ss < 10 ? "0" + ss : ss;
+									return hh > 0 ? `${hh}:${mm}:${ss}` : `${mm}:${ss}`;
+								};
+
+								// Update Time While Playing
+								audio.addEventListener("timeupdate", () => {
+									aNow.innerHTML = timeString(audio.currentTime);
+								});
+
+								// Playback Location Bar Tool
+								audio.addEventListener("loadedmetadata", () => {
+									// Refresh Seek Bar
+									aNow.innerHTML = timeString(0);
+									aTime.innerHTML = timeString(audio.duration);
+
+									// Make sure max time is at the end of the bar.
+									aSeek.max = Math.floor(audio.duration);
+
+									// Allow User to Change Location of Playback.
+									let aSeeking = false; // USER IS NOW CHANGING TIME
+									aSeek.addEventListener("input", () => {
+										aSeeking = true; // PREVENTS CLASH WITH (E3)
+									});
+									aSeek.addEventListener("change", () => {
+										audio.currentTime = aSeek.value;
+										if (!audio.paused) {
+                                            audio.muted = true;
+											audio.play();
+											audio.muted = false;
+										}
+										aSeeking = false;
+									});
+
+									// Update Playback Bar In Realtime
+									audio.addEventListener("timeupdate", () => {
+										if (!aSeeking) {
+											aSeek.value = Math.floor(audio.currentTime);
+										}
+									});
+								});
+
+								// Button to Mute
+								let jsPreMuteVolume = 0; // Used to remember previous Vol Level AND tells Mute State
+
+								// Note we're only changing the AUDIO volume not the UI volume slider.
+								// But we are changing the button on the UI to show "MUTE".
+								aVol.addEventListener("click", () => {
+									if (jsPreMuteVolume > 0) {
+										// Previous Muted Volume Level Detected, Don't Change it!
+										// This means MUTE was in effect. So we're going to UNMUTE
+										aVolIcoImg.src = jsAudioSupportPath + "btnVol.svg";
+										audio.volume = jsPreMuteVolume;
+										aVolume.value = jsPreMuteVolume;
+										jsPreMuteVolume = 0;
+									} else {
+										// We need to MUTE the volume. Record current Volume for next click event.
+										jsPreMuteVolume = aVolume.value;
+										aVolIcoImg.src = jsAudioSupportPath + "btnMute.svg";
+										audio.volume = 0;
+									}
+								});
+
+								// TODO: Would be nice to have: Add functionality to pickup onPress, drag values for Volume Bar
+
+								// Volume Slider Control -- Adjust UI Accordingly
+								aVolume.addEventListener("change", () => {
+									audio.volume = aVolume.value;
+									cVisualiser.innerHTML = (audio.volume * 100).toFixed(0) + "%";
+									if (aVolume.value === '0') {
+										aVolIcoImg.src = jsAudioSupportPath + "btnMute.svg";
+									} else {
+										aVolIcoImg.src = jsAudioSupportPath + "btnVol.svg";
+										jsPreMuteVolume = 0;
+									}
+								});
+
+								// Watch For Errors Loading The Final Assets
+								audio.addEventListener('error', () => {
+									// Error accessing Audius Playlist Tracks Data Lists
+									console.log("Error accessing Audius Track Source... moving forward.");
+									// Move Forward On The PlayList
+									audNow++;
+									if (audNow >= finalPlayList.length) {
+										audNow = 0;
+									}
+									audPlay(audNow);
+								});
+							}
+							// TODO: Add retry attempts at each step to deal with the inconsistencies of the Internet
+						}).catch(error => {
+						// Error accessing Audius Playlist Tracks Data Lists
+						if (jsDebug) {
+							alert("Error accessing Audius PlayList Tracks Data.");
+						}
+						console.log("Error accessing Audius Playlist Tracks Data.");
+                        document.getElementById('aStatusServers').style.color = '#c23434';
+						throw(error);
+					});
+				}).catch(error => {
+				// Error accessing Audius PlayList Info
+				if (jsDebug) {
+					alert("Error accessing Audius PlayList Metadata.");
+				}
+				console.log("Error accessing Audius PlayList Metadata");
+                document.getElementById('aStatusMetadata').style.color = '#c23434';
+				throw(error);
+			});
+		}).catch(error => {
+		// Error accessing Audius Primary URL
+		if (jsDebug) {
+			alert("Error accessing Audius Servers.");
+		}
+		console.log("Error accessing Audius Servers.");
+        document.getElementById('aStatusTracks').style.color = '#c23434';
+		throw(error);
+	});
+	/* END */
+</script>
+<!-- --------------------------------------------- SNIP TO HERE ------------------------------------------------------->
+
+Stuff here!
+</body>
+</html>
