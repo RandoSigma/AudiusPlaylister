@@ -12,11 +12,11 @@ This project is a purely open-source project which only leverages existing ECMAS
 
 Audius is a Web3 block-chain based application model that can replace Web2 music sources like Spotify, Youtube, Amazon, Soundcloud and others. There is no "advertising revenue" system. The model is built upon a Blockchain and service participants are paid by staking Audio tokens to "feed the transaction staking system".
 
-The Audius Playlister project will start with this basic embeddable minimal code streamer.  If you're interested in where this is going, read on. This is a purely open-source project which only leverages existing ECMAScript compatible JavaScript built-into common web-browser technology as of this writing. Use it as an example or copy/cut/paste/edit it into your own web-sites if you wish.
+The Audius Playlister project will start with this basic embed-able minimal code streamer.  If you're interested in where this is going, read on. This is a purely open-source project which only leverages existing ECMAScript compatible JavaScript built-into common web-browser technology as of this writing. Use it as an example or copy/cut/paste/edit it into your own web-sites if you wish.
 
 ## WHAT IS THIS?
 
-A responsibly coded JavaScript-based HTML5/CSS3 web-enabled player for streaming your Audius Playlists directly to your web users. No libraries required. It leverages clean reliance on the built-in web browser capabilities.  It's been tested on the latest (as of this writing) versions of the popular web browsers: Chrome, Chromium, Firefox, Brave. Safari has issues with the same code but can play one track at a time. The back-bone of this code works upon WebAudio technology supported by standard browsers. Audius is a decentralized music streaming platform.
+A responsibly coded JavaScript-based HTML5/CSS3 web-enabled player for streaming your Audius Playlists directly to your web users. No libraries required. It leverages clean reliance on the built-in web browser capabilities.  It's been tested on the latest (as of this writing) versions of the popular web browsers: Chrome, Chromium, Firefox, Brave. Safari has issues with the same code but can play one track at a time. The back-bone of this code works upon Web Audio technology supported by standard browsers. Audius is a decentralized music streaming platform.
 
 Browser adoption chart here: [Can I Use Web Audio API] (https://caniuse.com/audio-api)
 
@@ -61,7 +61,7 @@ The goal of this project is to give anyone with a modicum of JavaScript, CSS, an
 
 ### What does MINIMALIST mean?
 
-Minimalist code is simple structures, straighforward logic, plenty of comments and notes. Minimalist code should be written to avoid in as many ways as possible reliance on supporting library stacks and the convenience of modular functionality frameworks. The Open Source Community and the Unix/Linux Mindset always treats every function as an atomic isolated tool.  This is what makes Linux environments so much more reliable and so much more powerful than many other operating systems.  This project should end up being an atomic isolated tool for web content creators as well.
+Minimalist code is simple structures, straightforward logic, plenty of comments and notes. Minimalist code should be written to avoid in as many ways as possible reliance on supporting library stacks and the convenience of modular functionality frameworks. The Open Source Community and the Unix/Linux Mindset always treats every function as an atomic isolated tool.  This is what makes Linux environments so much more reliable and so much more powerful than many other operating systems.  This project should end up being an atomic isolated tool for web content creators as well.
 
 ## IMPLEMENTATION & CODING NOTES
 
@@ -69,11 +69,11 @@ Note from Stradius. First a disclaimer.  This is not an Audius sanctioned projec
 
 Here are some notes on how I laid out the initial code:
 
-1. FORCE SMALL SCREEN DEVICES TO MAINTAIN SCALE AND STOP WRECKING MY MEDIA QUERIES: If you CAN, it works better when your web page is loaded on a small screen with the ListenWithMe app if you ade a meta tag for viewport that restricts automatic scaling.  Let the USERS decide if they want to zoom in.
+1. FORCE SMALL SCREEN DEVICES TO MAINTAIN SCALE AND STOP WRECKING MY MEDIA QUERIES: If you CAN, it works better when your web page is loaded on a small screen with the ListenWithMe app if you add a meta tag for viewport that restricts automatic scaling.  Let the USERS decide if they want to zoom in.
 
 > <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=5.0, minimum-scale=0.5"/>
 
-2. USER INTERACT TO PERMIT AUDIO PLAYBACK: Thanks to some annoying web-sites in the past, a security model was built around the WebAudio API Autoplay functionality and the implementation seems to have been different depending upon which browser you use.  For example (as of this writing 01/2023) in my testing I've found that Chrome & Chromium based browser (tested on Windows, Ubuntu, MacOS) may log an error on first-time load attempts to autoplay music but follow-up attempts will be allowed.  On Firefox autoplay is allowed.  On MacOS Safari autoplay is allowed. On iOS Safari (iPhones) the browser will lock-down WebAudio is you try autoplay at all.  That's why the web-app has an initial loading phase followed by a "PRESS PLAY" notification.  User Interaction is REQUIRED before autoplay activity can work.  This app follows every trick I could find to make each track in the playlist engage automatically in the sequence dictated by the Playlist.
+2. USER INTERACT TO PERMIT AUDIO PLAYBACK: Thanks to some annoying web-sites in the past, a security model was built around the Web Audio API autoplay functionality and the implementation seems to have been different depending upon which browser you use.  For example (as of this writing 01/2023) in my testing I've found that Chrome & Chromium based browser (tested on Windows, Ubuntu, MacOS) may log an error on first-time load attempts to autoplay music but follow-up attempts will be allowed.  On Firefox autoplay is allowed.  On MacOS Safari autoplay is allowed. On iOS Safari (iPhones) the browser will lock-down Web Audio if you try autoplay at all.  That's why the web-app has an initial loading phase followed by a "PRESS PLAY" notification.  User Interaction is REQUIRED before autoplay activity can work.  This app follows every trick I could find to make each track in the playlist engage automatically in the sequence dictated by the Playlist.
 
 3. NEW CHALLENGES WHEN YOU GO MODULAR: You may of course extract the JavaScript and put it into it's own modular file, loaded by the HTML as a linked resource.  However, be aware, doing so introduces the challenge of browser Content Security Policy (CSP) challenges and Cross-Origin Resource Sharing (CORS) issues as well.  Here are links to information abou those subjects (keeping the JavaScript embedded removes the need for these concerns).
 
@@ -81,7 +81,7 @@ Here are some notes on how I laid out the initial code:
 
   More about CSP here: [CSP WIKI](https://en.wikipedia.org/wiki/Content_Security_Policy)
 
-4. WELCOME TO THE SPAGHETTI-VERSE: The nature of decentralized multi-node delivery systems means that sometimes user endpoints (the web browser) will lose contact with the service endpoints (a distributed node network). The ListenWithMe code tries several nested fetches of date from the Audius API Endpoints and if there is an error anywhere along the way it will just stop and throw an error. Reloading the page should restart the application. Depending upon your browser security settings, I've seen issues with Audius Nodes being overloaded (they are getting quite popular now) to Audius Nodes attempting to drop from https to http mode during the stream initiation.  Some browsers do not allow that.
+4. WELCOME TO THE SPAGHETTI-VERSE: The nature of decentralized multi-node delivery systems means that sometimes user endpoints (the web browser) will lose contact with the service endpoints (a distributed node network). The ListenWithMe code tries several nested fetches of date from the Audius API Endpoints and if there is an error anywhere along the way it will just stop and throw an error. Reloading the page should restart the application. Depending upon your browser security settings, I've seen issues with Audius Nodes being overloaded (they are getting quite popular now) to Audius Nodes attempting to drop from https to http protocol during the stream initiation.  Some browsers do not allow that.
 
 5. OPTIMIZED FOR HIGH SCORES ON LIGHTHOUSE TESTING: The player has been tested against the Google's Lighthouse Mobile and Desktop tests with high success.  But as you adjust the interfaces for your own needs please test frequently.  Everything from color contrast differences to the distance between the buttons and the content can score your implementation lower on things like Accessibility.  For example, Audius provides album artwork in 150x150 and 480x480 sizes.  Lighthouse gives higher marks for a minimum size of 300x300 on desktop so ListenWithMe will pull both 150x150 and 480x480 sizes from Audius and resize the 480x480 to 300x300 for Desktops screen-sizes.
 
@@ -91,7 +91,9 @@ Here are some notes on how I laid out the initial code:
 
 8. CSS MODEL: I've tried to stick with ID references for specific directives in the CSS and to more easily communicate to the browser about style changes (such as button changes).  I've also tried to adhere to a naming convention that identifies the CSS elements more atomically so that the names won't collide or conflict with your own site naming schemes.
 
-9. SIMPLE STRUCTURES: The code is very linear and exceedingly annotated/commented for clarity. This code is for others to use so we must always code for the next programmer not just for ourselves.
+9. UI/UX DESIGN CONCERNS: The footprint of the embedded interfaces is fixed (you may notice extra space).  This was by design so that there would be no JANKY load and display behavior on your web-site and various smaller screen displays.  You can modify the height for example by adjusting the #aListWrap height. 
+
+10. SIMPLE STRUCTURES: The code is very linear and exceedingly annotated/commented for clarity. This code is for others to use so we must always code for the next programmer not just for ourselves.
 
 # HOW CAN I HELP DEVELOP THIS PROJECT?
 
@@ -101,9 +103,9 @@ First that would be a well received request!  Please help yourself, download the
 
 [Check Out AUDIUS!] (https://audius.co).
 
-BlockChain technology is coming of age regardless of what the news sources think. It's an unstoppable unflappable next stage of technology development world-wide and takes the Internet itself to the next stage which we started affectionately calling "Web3" but was quickly trashed by media and stolen by "Web2" profit-monger corporations. 
+Blockchain technology is coming of age regardless of what the news sources think. It's an unstoppable unflappable next stage of technology development world-wide and takes the Internet itself to the next stage which we started affectionately calling "Web3" but was quickly trashed by media and stolen by "Web2" profit-monger corporations. 
 
-Here is the [Audius Whitepaper] (https://whitepaper.audius.co/AudiusWhitepaper.pdf).
+Here is the [Audius White Paper] (https://whitepaper.audius.co/AudiusWhitepaper.pdf).
 
 
 ## SOFTWARE BILL OF MATERIALS
