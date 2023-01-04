@@ -20,6 +20,8 @@ A responsibly coded JavaScript-based HTML5/CSS3 web-enabled player for streaming
 
 Browser adoption chart here: [Can I Use Web Audio API] (https://caniuse.com/audio-api)
 
+Here's more on the Web Audio API: [Mozilla Developer Docs] (https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API)
+
 ## WHAT PROBLEMS DOES IT SOLVE?
 
 This project was conceived to start solving the biggest problem for content creators... how to have music delivered to your viewers along with your online social activities WITHOUT getting burned by copyright infringement issues and streaming platform restrictions. The music on Audius is FREE to stream, a vast collection, and some very talented composers, performers, et al.  Initially the goal is to have a ListenWithMe web-based application that allows users to listen to a playlist "in tandem" with the promoter using a technique we'll call scrivening. The initiator of the "listening party" announces by some manner that they've begun playing their ListenWithMe app by email, chat, or other notification.  Then anyone who wants to follow along can initiate the same web app, and engage a streaming session with Audius -- independently -- from the originator or host of whatever event is taking place.  This means each user of the application is only listening to their own stream and the web application would try to keep them "relatively" in sync based upon the timestamps reported between them.
