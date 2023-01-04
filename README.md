@@ -114,6 +114,8 @@ The Software Bill of Materials (SBOM) for this project (if we're doing this righ
 
 This application only requires access to the Audio Output of the Web Browser Software and the ability to make https protocol calls to the Audius API endpoints as listed and provided by the Audius API Data Services.
 
+Thus, any pull requests that use any libraries will be declined.
+
 ## LICENSE
 
 [CC0 1.0 Universal] (https://github.com/RandoSigma/AudiusPlaylister/blob/main/LICENSE).
