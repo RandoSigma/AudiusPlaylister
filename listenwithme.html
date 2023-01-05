@@ -9,16 +9,15 @@
 	<meta name="msapplication-TileColor" content="#da532c"/>
 	<meta name="theme-color" content="#ffffff"/>
 	<meta name="msapplication-TileColor" content="#da532c"/>
-	<meta name="description" content="Put your description here."/>
+	<meta name="description" content="~~Put your site description here. For SEO..."/>
 	<meta name="theme-color" content="#ffffff"/>
 	<meta property="og:title" content=""/>
-	<meta property="og:site_name" content="Underglimmer and RandoSigma Gaming Concern"/>
-	<meta property="og:description" content="RandoSigma (Twitch Streamer) searches for the Underglimmer in Massive Multiplayer Online and Hosted Games built into Open Worlds."/>
+	<meta property="og:site_name" content="~~ Site Name for SEO Here"/>
+	<meta property="og:description" content="~~ Describe your site again for SEO!"/>
 	<meta property="og:type" content="og:website"/>
-	<meta property="og:url" content="https://www.underglimmer.com/"/>
+	<meta property="og:url" content="~~ Your site URL here https://www.underglimmer.com/"/>
 	<meta property="og:locale" content="en_US"/>
-	<meta property="og:image" content="https://www.underglimmer.com/p/big_u.png"/>
-	<meta content="Listen to music while I do! Audius Playlist synchronizer!" name="description"/>
+	<meta property="og:image" content="~~ Your icon favicon URL HERE https://www.underglimmer.com/p/big_u.png"/>
 	<meta content="noodp" name="robots"/>
 	<meta content="https://www.underglimmer.com/p/big_u.png" itemprop="image"/>
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
@@ -40,8 +39,13 @@
 <body>
 <div class="main-content">
 	<h1>Listen With Me</h1>
-	<p>Welcome to my Audius Playlister! Here is some music you can stream without ANY interruption or nosy corporate tracking methods thanks to Web3 Blockchain Technologies! Source code is Creative Commons and free for you to use.  If you want to copy the whole section you can swap out your OWN playlists on Audius too! Check it out!</p>
-	<p>https://audius.co</p>
+	<p>Now you can share your Audius Playlist with anyone. Style it your way.  And it works for Audius Albums too.</p>
+	<p>Welcome to my Audius Playlister! Here is a way you can stream some music without ANY interruption or nosy corporate
+		tracking interference.  All thanks to Web3 Blockchain Technologies! This page is part of a project called:
+		"ListenWithMe".  The idea is simply to allow easy access to copy/paste content into your own web sites.
+		The files are Creative Commons and free for you to use.  If you want to copy the whole section you can swap
+		out your OWN playlists on Audius too! Check it out!</p>
+	<p>Come participate at <a href="https://audius.co" target="_new">https://audius.co</a></p>
 </div>
 <!-- -------------------------------------------- SNIP FROM HERE ------------------------------------------------------>
 <div class="audio-player">
@@ -94,38 +98,46 @@
 /*
 PURPOSE:
 
-HOW THIS WORKS:
+Use this HTML, CSS, and supporting PNG files by putting them into your own web sites.  You will still need to tweak colors,
+	some CSS, and the JavaScript to make it fit best into your own site.  You can also join the Audius Community,
+	create your OWN playlists on the music streaming service, and pop the URL into this JavaScript to stream it directly
+	to your web visitors.
+
+HOW THIS WORKS (FUNCTIONALITY:
 
 1) Seek out available Audius Servers by initiating a session with the Audius API. The session is initiated using the
 	actual Audius URL for the playlist you want to play.  See the variables set below for examples.
-	The Audius API will respond with the ID string for that playlist if it is found or error out.
-2) Once you have that origin ID for the playlist you can then use that to pull a Track List from the Audius API.
-3) Each track in the Playlist comes with artist and track ID info in the Response JSON.  You must gather whatever you
- 	intend to use from the set but be aware that Track Internal ID and the Artist Internal ID are both mixed in there.
+	The Audius API will respond with the ID string for that playlist if it is found or it will error out.
+2) Once you have that ID for the playlist the code then uses that to pull a Playlist Tracks data from the Audius API.
+3) Each track in the Playlist comes with artist and track ID info in the Response JSON.  The code gathers SOME of the
+	data to use here but be aware that Track Internal ID and the Artist Internal ID are both in the JSON results.
  	There's some good info if you want to expand this player UI with more pizzazz.
-4) With this information in hand, you can rig up the player interface to pull associated images/title info and links.
-	The origin URL for the tracks may come from other Audius Endpoints providing service from the
-	IPFS (Inter-Planetary File System).
+4) With this information in hand the code will pull associated images/title info and links. The origin URL for the
+	tracks may come from other Audius Endpoints.
+5) The starting point URL is a const variable found below, replace the URL string with your own Playlist URL, then
+	reload the page to see the new list loaded.
 
-Starting Points: ** look for "id" in the JSON response.
+EXAMPLE ACTIVITY OF THE CODE:
 
-Sample API PlayList ID Search:
+Sample API PlayList ID Search returns Playlist ID:
 https://blockchange-audius-discovery-02.bdnodes.net/v1/resolve?url=https://audius.co/strad/playlist/one-world-dream-119912&app_name=LISTENWITHME
 
-Sample API PlayList Track list:
+Sample API PlayList Track list pulled using the Playlist ID:
 https://blockchange-audius-discovery-02.bdnodes.net/v1/playlists/ZZx3E/tracks?app_name=LISTENWITHME
 (NOTE: There are Artist ID's also in the results of the previous API call).
 
-Sample API Pull Track Item for Playing:
+Sample API Pull Track Item for Playing (note the Track ID in the URL):
 https://blockchange-audius-discovery-02.bdnodes.net/v1/tracks/AKQom/stream?app_name=LISTENWITHME
 
 DEPENDENCIES ON THE API CALLS SUCCEEDING:
-This is linear with Try/Catch blocks nested at each failure point. NO outside script is required for this player to
-function in your web pages.  If any point in the calls out to the source Audius API endpoints fail the page will just
-throw an error. A simple solution at that point might be to reload the page if all the starting point Playlist URL is
-correct... the Internet can be fickle.
+This is linear set of Fetch/Promise requests with Try/Catch blocks nested at each failure point. NO outside script is
+required for this player to function in your web pages.  If any step in the fetches out to the source Audius API
+fail the page will throw an error. A simple solution at that point might be to reload the page if all the starting
+point Playlist URL is correct... the Internet can be fickle. And Audius is becoming incredibly popular so the server
+load is probably also getting stretched.
 
 WISHLIST FOR IMPROVEMENTS:
+
 TODO: Suggest TO Audius Developers that they provide some sort of Gain Data about audio tracks in their
 		API Track Metadata to help with normalizing audio levels of volume during playback.
 TODO: Use Browser Built-in WebAudio technology to analyze tracks and normalize gain between them.
@@ -149,13 +161,15 @@ TODO: Pray that Apple will finally get iOS Safari to work like the rest of them.
     console.log("ListenWithMe starting up...");
 
     // Set your Audius Playlist by the URL to reach the Playlist (examples below) ~~
-    //const jsOriginPlaylist = "https://audius.co/strad/playlist/stradius-menagerie-1972895293"; // <-- STARTS HERE!
-    const jsOriginPlaylist = "https://audius.co/strad/playlist/one-world-synthetic-97265";
+    const jsOriginPlaylist = "https://audius.co/strad/playlist/stradius-menagerie-1972895293"; // <-- ~~ START HERE!
+	//const jsOriginPlaylist = "https://audius.co/strad/album/humans-need-journeys-123197"; // <-- Works on ALBUMS too.
+    //const jsOriginPlaylist = "https://audius.co/strad/playlist/one-world-synthetic-97265";
     //const jsOriginPlaylist = "https://audius.co/strad/playlist/one-world-dream-119912";
 
     // Use Start Volume setting to find a middle ground for your playlist. (Range 0.1 to 1.0)
-    const jsStartVolume = .1;
-	let jsUserStart = 0; // Set to OFF until the PLAY button is pressed first. <--- NOTE this is a GLOBAL.
+    const jsStartVolume = .1; // <-- Starting at 10% to avoid blasting your listeners.
+
+	let jsUserStart = 0; // Set to OFF until the PLAY button is pressed first.
 	let jsAudioSupportPath = "./s/"; // <-- Use THIS to remap most of the support files to your directories.
 
     const jsSeekPlaylistIdUrl = "/v1/resolve?url=" + jsOriginPlaylist + "&app_name=LISTENWITHME";
@@ -534,7 +548,7 @@ TODO: Pray that Apple will finally get iOS Safari to work like the rest of them.
 	/* END */
 </script>
 <!-- --------------------------------------------- SNIP TO HERE ------------------------------------------------------->
-
-Stuff here!
+<p>The CSS media queries should resize this player to fit smaller and smaller screen sizes.  The player is also wrapped in
+	aPlayerContainer which should center it within the available space.</p>
 </body>
 </html>

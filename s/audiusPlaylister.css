@@ -42,25 +42,25 @@
 	--aPlayNowBg-color: rgb(81, 125, 214);
 	--aArtworkFrame-color: rgb(230, 204, 152);
 	--aListBg-color: rgb(116, 118, 116);
+	--aLoaderBg-color: rgb(79, 179, 210); */
 	
 	/* Audius Pallete
 	--aPlayContainer-color: rgb(218, 112, 233);
-	--aPlayContainer-border: rgb(255, 255, 255);
-	--aWrapBg-color: rgb(255, 255, 255);
-	--aWrapLabel-color: linear-gradient(rgb(22, 17, 8), rgb(255, 255, 255));
+	--aPlayContainer-border: rgb(216, 111, 231);
+	--aWrapBg-color: rgb(216, 111, 231);
+	--aWrapLabel-color: linear-gradient(rgb(22, 17, 8), rgb(216, 111, 231));
 	--aWrapBgSm-color: rgb(202, 15, 222);
 	--aWrapBg-border: rgb(120, 24, 195);
 	--aPlayNow-color: rgb(240, 193, 5);
 	--aPlayNowBg-color: rgb(119, 23, 194);
 	--aArtworkFrame-color: rgb(230, 204, 152);
 	--aListBg-color: rgb(116, 118, 116);
-	/* end */
+	--aLoaderBg-color: rgb(200, 15, 220); */
 }
 
-/* Can be used to position player within a container
+/* aPlayerContainer Can be used to position player within a container
 	Keep this box! It will force the size of the interface
-	on your slow-loading screens and reduce janky-ness of the
-	User Interface.  */
+	on your slow-loading screens and reduce janky UI loading behavior  */
 #aPlayerContainer {
 	margin-left: auto;
 	margin-right: auto;
@@ -83,11 +83,9 @@
 	padding: 2em 0 0 0;
 	border-radius: .5em;
 	border: var(--aWrapBg-border) .2em solid;
-	/* background styles */
 	position: relative;
 	display: inline-block;
 	background-color: var(--aWrapBg-color);
-	/*background: var(--aWrapBg-color)linear-gradient(-45deg, rgb(255, 255, 255) 0%, rgb(150, 120, 58) 100%) 0% 0% / 150% 150%;*/
 	animation: 5s ease 1s infinite normal none running Gradient;
 }
 #aWrap:after{
