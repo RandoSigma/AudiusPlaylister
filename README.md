@@ -18,13 +18,13 @@ The Audius Playlister project will start with this basic playlist code streamer.
 
 It's a music player for your web site.
 
-## WHAT PROBLEMS DOES IT SOLVE?
+## WHAT PROBLEMS DOES THIS SOLVE?
 
 It allows people to share streaming music playlists with other people.
 
-Here's an example of it as a stand-alone web page: (https://www.underglimmer.com/listen_with_me/listenwithme.html).
+> Here's an example of it as a stand-alone web page: [STAND-ALONE](https://www.underglimmer.com/listen_with_me/listenwithme.html).
 
-Here's an example of it embedded on [Underglimmer] (https://www.underglimmer.com/art_stradius.html).
+> Here's an example of it embedded on [EMBEDDED](https://www.underglimmer.com/art_stradius.html).
 
 So... who wins by using this tool?
 
@@ -68,9 +68,9 @@ The initial vision here is to keep it all in one page.  This avoids Cross Origin
 
 It's just minimalistic nested promises (fetch blocks) with try/catch error handling to deal with the variability of Internet experiences from any particular endpoint in the world.
 
-Browser adoption chart here: [Can I Use Web Audio API] (https://caniuse.com/audio-api)
+> Browser adoption chart here: [Can I Use Web Audio API](https://caniuse.com/audio-api)
 
-Here's more on the Web Audio API: [Mozilla Developer Docs] (https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API)
+> Here's more on the Web Audio API: [Mozilla Developer Docs](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API)
 
 ### What does MINIMALIST mean?
 
